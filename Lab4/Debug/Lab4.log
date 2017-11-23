@@ -1,0 +1,12 @@
+﻿  Source.cpp
+c:\users\полина\desktop\lab4\lab4\source.cpp(20): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+c:\users\полина\desktop\lab4\lab4\source.cpp(32): warning C4305: return: усечение из "double" в "float"
+c:\users\полина\desktop\lab4\lab4\source.cpp(38): warning C4305: return: усечение из "double" в "float"
+c:\users\полина\desktop\lab4\lab4\source.cpp(81): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+c:\users\полина\desktop\lab4\lab4\source.cpp(108): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note:  см. объявление "fopen"
+c:\users\полина\desktop\lab4\lab4\source.cpp(122): warning C4244: return: преобразование "double" в "float", возможна потеря данных
+c:\users\полина\desktop\lab4\lab4\source.cpp(152): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+c:\users\полина\desktop\lab4\lab4\source.cpp(153): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+  Lab4.vcxproj -> C:\Users\Полина\Desktop\LAB4\Lab4\Debug\Lab4.exe
+  Lab4.vcxproj -> C:\Users\Полина\Desktop\LAB4\Lab4\Debug\Lab4.pdb (Partial PDB)
