@@ -1,23 +1,12 @@
-/*“естовый пример Ѕѕ‘:
-procedure PPT(var x:mas;sign, NP:integer; T:real);
-var
-nmax,i,nn,mm,lr,nw,ii,j,loc,nw1:integer;
-zz,W,delta:real;
-MSK:array[1..20] of integer;
-cs:array[1..2] of real;
-cxcs;xa,hold:complex;
-label 1,2;*/
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
 
-#define L 64
-#define N 4096
+float M_PI = acos(-1.0);
+
 struct complex {
 	float re, im;
 };
-
-float M_PI = acos(1.0);
 
 void fft(struct complex x[], int sign, int np, float t);
 struct complex cmplx(float x, float y);
@@ -42,49 +31,16 @@ float test_function(float x) {
 	}
 }
 
-
-
 int main(int argc, char* argv[]) {
-/*
-	int n[N];
-	float xn[N];
-	struct complex yn[N];
-	float Wn[N];
-	int j;
-	float v = (float)L / (float)N;
 
-
-	// ???
-	for (j = 0; j < N; j++) {
-		n[j] = j;
-		xn[j] = (j - (N / 2))*v;
-		yn[j].re = test_function(xn[j]);
-		yn[j].im = 0;
-		Wn[j] = (float)n[j] / (float)L;
-	}
-	// ???
-	
-	FILE * pFile;
-	pFile = fopen("results.txt", "w");
-
-	float remas[N];
-	int i;
-	fft(yn, 1, 12, (float)L);
-	for (i = 0; i<N; i++) {
-		remas[i] = sqrt(yn[i].re*yn[i].re + yn[i].im*yn[i].im);
-		// printf("%f",remas[i]);
-		fprintf(pFile, "%f %f\n", Wn[i], remas[i]);
-	}
-	fclose(pFile);
-	*/
-	int exponent = 6;
+	int exponent = 10;
 	int length = pow(2, exponent);
 	float x_begin = -10;
 	float x_end = 10;
 	float step = (x_end - x_begin) / length;
 
-	complex* series = (complex*) malloc(length*sizeof(complex));
-	float* amplitudes = (float *) malloc(length*sizeof(float));
+	complex* series = (complex*)malloc(length * sizeof(complex));
+	float* amplitudes = (float *)malloc(length * sizeof(float));
 	int i;
 	for (i = 0; i < length; i++) {
 		series[i].re = test_function(x_begin + i*step);
@@ -93,28 +49,23 @@ int main(int argc, char* argv[]) {
 
 	fft(series, 1, exponent, 1);
 
-	/*for (i = 0; i < length / 2; i++) 
+	for (i = 0; i < length / 2; i++)
 	{
-		amplitudes[i] = absc(series[length / 2 + i]); 
-		amplitudes[i + length / 2] = absc(series[i]); 
-	}*/
-
-	for (i = 0; i < length; i++)
-	{
-		amplitudes[i] = absc(series[i]); //???
+		amplitudes[i] = absc(series[length / 2 + i]);
+		amplitudes[i + length / 2] = absc(series[i]);
 	}
+
+	//for (i = 0; i < length; i++) amplitudes[i] = absc(series[i]); 
 
 	FILE * pFile;
 	pFile = fopen("results.txt", "w");
 
 	for (i = 0; i < length; i++) {
-		fprintf(pFile, "%d %f\n", i /* - length / 2*/, amplitudes[i]);
-		//fprintf(pFile, "%d %f\n", i, series[i].re);
+		fprintf(pFile, "%d %f\n", i - length / 2, amplitudes[i]);
 	}
 
 	fclose(pFile);
 
-	printf("e\n");
 	//getchar();
 }
 
@@ -131,14 +82,14 @@ void fft(struct complex x[], int sign, int np, float t) {
 	pi = M_PI;
 	nmax = st(2, np);
 	printf("%d\n", nmax);
-	
+
 	zz = 2 * pi*sign / nmax;
 	delta = t / nmax;
-	if (sign<0) {
+	if (sign < 0) {
 		delta = 1 / t;
 	}
 	msk[0] = nmax / 2;
-	for (i = 1; i<np; i++) {
+	for (i = 1; i < np; i++) {
 		msk[i] = msk[i - 1] / 2;
 	}
 	nn = nmax;
@@ -181,7 +132,7 @@ void fft(struct complex x[], int sign, int np, float t) {
 	for (i = 1; i <= nmax; i++) {
 		nw1 = nw + 1;
 		hold = x[nw1 - 1];
-		if (nw1 - i>0) {
+		if (nw1 - i > 0) {
 			x[nw1 - 1].re = x[i - 1].re*delta;
 			x[nw1 - 1].im = x[i - 1].im*delta;
 		}
